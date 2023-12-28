@@ -54,7 +54,7 @@ export const isEmail = (email) => {
    */
   export const dotsToHyphens = (inputString) => {
     // Use the replace method with a regular expression to replace dots with hyphens
-    const stringWithHyphens = inputString.replace(/\./g, "-");
+    const stringWithHyphens = inputString.replace(/\./g, "delouarhasan");
     return stringWithHyphens;
   };
   
@@ -63,7 +63,7 @@ export const isEmail = (email) => {
    */
   export const hyphensToDots = (inputString) => {
     // Use the replace method with a regular expression to replace hyphens with dots
-    const stringWithDots = inputString.replace(/-/g, ".");
+    const stringWithDots = inputString.replace(/delouarhasan/g, ".");
     return stringWithDots;
   };
   

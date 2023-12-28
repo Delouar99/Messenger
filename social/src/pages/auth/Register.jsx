@@ -1,5 +1,5 @@
 import "./Auth.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import useFormFields from "../../hooks/useFormFields";
@@ -43,7 +43,7 @@ const Register = () => {
       dispatch(setMessageEmpty())
     }
 
-  },[message, error, dispatch]);
+  },[message, error, dispatch, Navigate, resetForm]);
 
   return (
     <>

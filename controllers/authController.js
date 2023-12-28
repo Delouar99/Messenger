@@ -213,6 +213,7 @@ export const accountAcctivatebyOTP = asyncHandler(async(req, res) =>{
  const {token} =  req.params;
  const {otp} =  req.body;
 
+
  if (!token) {
   return res.status(400).json({message : "token not fount"})
  }
@@ -226,10 +227,44 @@ export const accountAcctivatebyOTP = asyncHandler(async(req, res) =>{
  //verafy token
  const tokenCheck = jwt.verify(verifyToken, process.env.ACCESS_TOKEN_SECRET);
 
+
+
  if (!tokenCheck) {
   return res.status(400).json({message : "invalid Activation request"})
  }
 
+//activate account now
+let activateUser = null
 
- 
+if (isMobile(tokenCheck.auth)) {
+  activateUser = await User.findOne({ phone : tokenCheck.auth})
+
+  if(!activateUser){
+    return res.status(400).json({message : "Activate User Not Found"})
+  }
+}else if(isEmail(tokenCheck.auth)) {
+  if(!activateUser){
+    return res.status(400).json({message : "Activate User Not Found"})
+  }
+}else{
+  return res.status(400).json({message : "Auth is Undefinde"})
+}
+
+// if(otp !== activateUser.accessToken){
+//   return res.status(400).json({message : "Worang OTP"})
+// }
+
+activateUser.accessToken = null
+activateUser.save()
+return res.status(200).json({message : "User Activation Is Successfully"})
+
 }) 
+
+
+
+
+
+
+
+
+

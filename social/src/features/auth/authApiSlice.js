@@ -17,6 +17,22 @@ export const createUser = createAsyncThunk("auth/createUser", async (data) => {
     throw new Error(error.response.data.message);
   }
 });
+// account Acctivated
+export const accountAcctivatebyOTP = createAsyncThunk("auth/accountAcctivatebyOTP", async (data) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:5050/api/v1/auth/activation-by-otp/${data.token}`,
+      {otp : data.otp},
+      {
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+});
 
 // Login user
 export const loginUser = createAsyncThunk("auth/loginUser", async (data) => {

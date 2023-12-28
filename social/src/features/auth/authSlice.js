@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+ 
+  accountAcctivatebyOTP,
   createUser,
   getLoggedInUser,
   loginUser,
@@ -31,6 +33,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+    //createuser
       .addCase(createUser.pending, (state, action) => {
         state.loader = true;
       })
@@ -42,6 +45,19 @@ const authSlice = createSlice({
         state.message = action.payload.message;
         state.loader = false;
       })
+      //accountAcctivatebyOTP
+      .addCase(accountAcctivatebyOTP.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(accountAcctivatebyOTP.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loader = false;
+      })
+      .addCase(accountAcctivatebyOTP.fulfilled, (state, action) => {
+        state.message = action.payload.message;
+        state.loader = false;
+      })
+      //dfdfdfdf
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.error.message;
       })
